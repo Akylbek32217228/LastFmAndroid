@@ -1,13 +1,12 @@
 package com.example.lastfmapp.presentation.name.TopArtists;
 
 import com.example.lastfmapp.model.ArtistEntity;
-import com.example.lastfmapp.presentation.name.BaseInterface.BaseInterface;
 
 import java.util.ArrayList;
 
-public class TopArtistsPresenter implements TopArtistsContract.Presenter{
+public class TopArtistsPresenter implements ITopArtistsContract.Presenter{
 
-    private TopArtistsContract.View mView;
+    private ITopArtistsContract.View mView;
 
     @Override
     public void getArtist() {
@@ -32,8 +31,8 @@ public class TopArtistsPresenter implements TopArtistsContract.Presenter{
 
 
     @Override
-    public void attachView(BaseInterface.View view) {
-        mView = (TopArtistsContract.View) view;
+    public void attachView(ITopArtistsContract.View view) {
+        mView  = view;
         mView.attachPresenter(this);
     }
 

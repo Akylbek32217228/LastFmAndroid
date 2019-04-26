@@ -1,14 +1,13 @@
 package com.example.lastfmapp.presentation.name.Track;
 
-import com.example.lastfmapp.presentation.name.BaseInterface.BaseInterface;
+public class TrackPresenter implements ITrackContract.Presenter {
 
-public class TrackPresenter implements TrackContract.Presenter {
+    private ITrackContract.View mView;
 
-    private TrackContract.View mView;
 
     @Override
-    public void attachView(BaseInterface.View view) {
-        mView = (TrackContract.View) view;
+    public void attachView(ITrackContract.View view) {
+        mView  = view;
         mView.attachPresenter(this);
     }
 

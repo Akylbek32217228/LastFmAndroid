@@ -1,13 +1,13 @@
 package com.example.lastfmapp.presentation.name.TopArtists;
 
+import com.example.core.mvp.ICoreMvpContract;
 import com.example.lastfmapp.model.ArtistEntity;
-import com.example.lastfmapp.presentation.name.BaseInterface.BaseInterface;
 
 import java.util.List;
 
-public interface TopArtistsContract {
+public interface ITopArtistsContract {
 
-    interface View extends BaseInterface.View{
+    interface View extends ICoreMvpContract.View<Presenter>{
 
         void showArtists(List<ArtistEntity> artists);
 
@@ -17,7 +17,7 @@ public interface TopArtistsContract {
 
     }
 
-    interface Presenter extends BaseInterface.Presenter {
+    interface Presenter extends ICoreMvpContract.Presenter<View> {
 
         void getArtist();
 

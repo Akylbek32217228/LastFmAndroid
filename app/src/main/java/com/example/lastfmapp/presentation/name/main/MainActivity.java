@@ -7,16 +7,26 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.lastfmapp.R;
+import com.example.lastfmapp.presentation.name.TopArtists.TopArtistsFragment;
+import com.example.lastfmapp.presentation.name.topTracks.TopTracksFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private SectionsPagerAdapter sectionsPagerAdapter;
+    TopArtistsFragment topArtistsFragment;
+    TopTracksFragment topTracksFragment;
     private TabLayout tab;
+    public static int i = 0;
+    ArrayList<Fragment> list;
 
     private ViewPager viewPager;
 
@@ -25,11 +35,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        list = new ArrayList<>();
+        topArtistsFragment = TopArtistsFragment.newInstance();
+        topTracksFragment = TopTracksFragment.newInstance();
+
+        list.add(topArtistsFragment);
+        list.add(topTracksFragment);
+
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager = findViewById(R.id.container_fragment);
         viewPager.setAdapter(sectionsPagerAdapter);
+
         tab = findViewById(R.id.tab_dots);
         tab.setupWithViewPager(viewPager, true);
+
 
     }
 
@@ -70,13 +89,15 @@ public class MainActivity extends AppCompatActivity {
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            return PlaceholderFragment.newInstance(position);
+            return list.get(position);
         }
 
 

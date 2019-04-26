@@ -1,14 +1,12 @@
 package com.example.lastfmapp.presentation.name.Artist;
 
-import com.example.lastfmapp.presentation.name.BaseInterface.BaseInterface;
-import com.example.lastfmapp.presentation.name.TopArtists.TopArtistsContract;
+public class ArtistPresenter implements IArtistContract.Presenter{
+    private IArtistContract.View mView;
 
-public class ArtistPresenter implements ArtistContract.Presenter{
-    private ArtistContract.View mView;
 
     @Override
-    public void attachView(BaseInterface.View view) {
-        mView = (ArtistContract.View) view;
+    public void attachView(IArtistContract.View view) {
+        mView = view;
         mView.attachPresenter(this);
     }
 

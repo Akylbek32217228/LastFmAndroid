@@ -4,11 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.lastfmapp.R;
-import com.example.lastfmapp.presentation.name.BaseInterface.BaseInterface;
 
-public class TrackActivity extends AppCompatActivity implements TrackContract.View{
+public class TrackActivity extends AppCompatActivity implements ITrackContract.View{
 
-    TrackContract.Presenter mPresenter;
+    ITrackContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +18,14 @@ public class TrackActivity extends AppCompatActivity implements TrackContract.Vi
         mPresenter.attachView(this);
     }
 
+
     @Override
-    public void finishView() {
+    public void finisView() {
 
     }
 
     @Override
-    public void attachPresenter(BaseInterface.Presenter presenter) {
+    public void attachPresenter(ITrackContract.Presenter presenter) {
 
     }
-
-
 }

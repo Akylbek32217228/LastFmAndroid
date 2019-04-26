@@ -4,12 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.lastfmapp.R;
-import com.example.lastfmapp.presentation.name.BaseInterface.BaseInterface;
 
 
-public class ArtistActivity extends AppCompatActivity implements ArtistContract.View {
+public class ArtistActivity extends AppCompatActivity implements IArtistContract.View {
 
-    private ArtistContract.Presenter mPresenter;
+    private IArtistContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,15 +19,14 @@ public class ArtistActivity extends AppCompatActivity implements ArtistContract.
         mPresenter.attachView(this);
     }
 
+
     @Override
-    public void finishView() {
+    public void finisView() {
 
     }
 
     @Override
-    public void attachPresenter(BaseInterface.Presenter presenter) {
+    public void attachPresenter(IArtistContract.Presenter presenter) {
 
     }
-
-
 }

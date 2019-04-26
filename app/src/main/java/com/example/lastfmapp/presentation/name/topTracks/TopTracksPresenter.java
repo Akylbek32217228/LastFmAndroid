@@ -3,13 +3,12 @@ package com.example.lastfmapp.presentation.name.topTracks;
 
 
 import com.example.lastfmapp.model.TrackEntity;
-import com.example.lastfmapp.presentation.name.BaseInterface.BaseInterface;
 
 import java.util.ArrayList;
 
-public class  TopTracksPresenter implements TopTracksContract.Presenter, BaseInterface.Presenter {
+public class  TopTracksPresenter implements ITopTracksContract.Presenter {
 
-    private TopTracksContract.View mView;
+    private ITopTracksContract.View mView;
 
     @Override
     public void getTracks() {
@@ -32,14 +31,15 @@ public class  TopTracksPresenter implements TopTracksContract.Presenter, BaseInt
 
     }
 
+
     @Override
-    public void attachView(BaseInterface.View view) {
-        mView = (TopTracksContract.View) view;
+    public void attachView(ITopTracksContract.View view) {
+        mView = view;
         mView.attachPresenter(this);
     }
 
     @Override
     public void detachView() {
-
+        mView = null;
     }
 }

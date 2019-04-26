@@ -1,14 +1,14 @@
 package com.example.lastfmapp.presentation.name.topTracks;
 
 
+import com.example.core.mvp.ICoreMvpContract;
 import com.example.lastfmapp.model.TrackEntity;
-import com.example.lastfmapp.presentation.name.BaseInterface.BaseInterface;
 
 import java.util.List;
 
-public interface TopTracksContract {
+public interface ITopTracksContract {
 
-    interface View extends BaseInterface.View{
+    interface View extends ICoreMvpContract.View<Presenter>{
 
         void showTracks(List<TrackEntity> tracks);
 
@@ -19,7 +19,7 @@ public interface TopTracksContract {
 
     }
 
-    interface Presenter extends BaseInterface.Presenter{
+    interface Presenter extends ICoreMvpContract.Presenter<View>{
         void getTracks();
 
         void onTrackClick(int position);
