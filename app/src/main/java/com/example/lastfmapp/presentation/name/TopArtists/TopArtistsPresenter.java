@@ -1,16 +1,41 @@
 package com.example.lastfmapp.presentation.name.TopArtists;
 
+import com.example.core.mvp.CoreMvpPresenter;
+import com.example.lastfmapp.data.artists.IArtistsRepository;
 import com.example.lastfmapp.model.ArtistEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class TopArtistsPresenter implements ITopArtistsContract.Presenter{
+public class TopArtistsPresenter extends CoreMvpPresenter<ITopArtistsContract.View>
+        implements ITopArtistsContract.Presenter{
 
-    private ITopArtistsContract.View mView;
+    private IArtistsRepository repository;
+
+    public TopArtistsPresenter(IArtistsRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void getArtist() {
-        ArrayList<ArtistEntity> list = new ArrayList<>();
+
+        repository.getArtists(new IArtistsRepository.ArtistsCallback() {
+            @Override
+            public void onSucces(List<ArtistEntity> artists) {
+                if ( mView != null) {
+                    mView.showArtists(artists);
+                }
+            }
+
+            @Override
+            public void onFailure(String message) {
+                if ( mView != null) {
+                    mView.showMessage(message);
+                }
+            }
+        });
+
+        /*ArrayList<ArtistEntity> list = new ArrayList<>();
 
         list.add(new ArtistEntity(1, "name", "image"));
         list.add(new ArtistEntity(2, "name", "image"));
@@ -21,23 +46,11 @@ public class TopArtistsPresenter implements ITopArtistsContract.Presenter{
 
         if ( mView != null) {
             mView.showArtists(list);
-        }
+        }*/
     }
 
     @Override
     public void onArtistClick(int pos) {
-
-    }
-
-
-    @Override
-    public void attachView(ITopArtistsContract.View view) {
-        mView  = view;
-        mView.attachPresenter(this);
-    }
-
-    @Override
-    public void detachView() {
 
     }
 }

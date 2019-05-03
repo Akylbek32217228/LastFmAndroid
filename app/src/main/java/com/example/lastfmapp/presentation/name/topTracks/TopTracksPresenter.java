@@ -2,28 +2,40 @@ package com.example.lastfmapp.presentation.name.topTracks;
 
 
 
+import com.example.core.mvp.CoreMvpPresenter;
+import com.example.lastfmapp.data.tracks.ITracksRepository;
 import com.example.lastfmapp.model.TrackEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class  TopTracksPresenter implements ITopTracksContract.Presenter {
+public class  TopTracksPresenter extends CoreMvpPresenter<ITopTracksContract.View>
+        implements ITopTracksContract.Presenter {
 
-    private ITopTracksContract.View mView;
+    private ITracksRepository repository;
+
+    public TopTracksPresenter(ITracksRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void getTracks() {
         //TODO: Get tracks from Repository
-        ArrayList<TrackEntity> trackEntities = new ArrayList<>();
+        repository.getTracks(new ITracksRepository.TracksCallback() {
+            @Override
+            public void onSucces(List<TrackEntity> tracks) {
+                if ( mView != null) {
+                    mView.showTracks(tracks);
+                }
+            }
 
-        trackEntities.add(new TrackEntity(1, "name", "artist", "image"));
-        trackEntities.add(new TrackEntity(2, "name", "artist", "image"));
-        trackEntities.add(new TrackEntity(3, "name", "artist", "image"));
-        trackEntities.add(new TrackEntity(4, "name", "artist", "image"));
-        trackEntities.add(new TrackEntity(5, "name", "artist", "image"));
-
-        if (mView != null) {
-            mView.showTracks(trackEntities);
-        }
+            @Override
+            public void onFailure(String message) {
+                if (mView != null) {
+                    mView.showMessage(message);
+                }
+            }
+        });
     }
 
     @Override
@@ -31,15 +43,4 @@ public class  TopTracksPresenter implements ITopTracksContract.Presenter {
 
     }
 
-
-    @Override
-    public void attachView(ITopTracksContract.View view) {
-        mView = view;
-        mView.attachPresenter(this);
-    }
-
-    @Override
-    public void detachView() {
-        mView = null;
-    }
 }

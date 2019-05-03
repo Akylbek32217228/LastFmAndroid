@@ -1,17 +1,13 @@
 package com.example.lastfmapp.presentation.name.Artist;
 
-public class ArtistPresenter implements IArtistContract.Presenter{
-    private IArtistContract.View mView;
+import com.example.core.mvp.CoreMvpPresenter;
+import com.example.lastfmapp.data.artists.IArtistsRepository;
 
+public class ArtistPresenter extends CoreMvpPresenter<IArtistContract.View> implements IArtistContract.Presenter{
 
-    @Override
-    public void attachView(IArtistContract.View view) {
-        mView = view;
-        mView.attachPresenter(this);
-    }
+    private IArtistsRepository repository;
 
-    @Override
-    public void detachView() {
-
+    public ArtistPresenter(IArtistsRepository repository) {
+        this.repository = repository;
     }
 }

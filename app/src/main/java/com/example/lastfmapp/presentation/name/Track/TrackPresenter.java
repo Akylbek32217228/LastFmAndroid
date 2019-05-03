@@ -1,18 +1,13 @@
 package com.example.lastfmapp.presentation.name.Track;
 
-public class TrackPresenter implements ITrackContract.Presenter {
+import com.example.core.mvp.CoreMvpPresenter;
+import com.example.lastfmapp.data.tracks.ITracksRepository;
 
-    private ITrackContract.View mView;
+public class TrackPresenter extends CoreMvpPresenter<ITrackContract.View> implements ITrackContract.Presenter {
 
+    private ITracksRepository repository;
 
-    @Override
-    public void attachView(ITrackContract.View view) {
-        mView  = view;
-        mView.attachPresenter(this);
-    }
-
-    @Override
-    public void detachView() {
-
+    public TrackPresenter(ITracksRepository repository) {
+        this.repository = repository;
     }
 }

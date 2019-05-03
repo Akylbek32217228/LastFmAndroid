@@ -1,31 +1,25 @@
 package com.example.lastfmapp.presentation.name.Track;
 
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.core.mvp.CoreMvpActivity;
+import com.example.core.mvp.CoreMvpPresenter;
+import com.example.core.mvp.ICoreMvpContract;
+import com.example.lastfmapp.App;
 import com.example.lastfmapp.R;
 
-public class TrackActivity extends AppCompatActivity implements ITrackContract.View{
+public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> implements ITrackContract.View{
 
-    ITrackContract.Presenter mPresenter;
+    private ITrackContract.Presenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track);
 
-        mPresenter = new TrackPresenter();
-        mPresenter.attachView(this);
-    }
-
-
-    @Override
-    public void finisView() {
-
-    }
-
-    @Override
-    public void attachPresenter(ITrackContract.Presenter presenter) {
-
+        presenter = new TrackPresenter(App.tracksRepository);
+        presenter.attachView(this);
     }
 }

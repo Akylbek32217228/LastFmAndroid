@@ -10,14 +10,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.example.core.mvp.CoreMvpFragment;
 import com.example.lastfmapp.R;
 import com.example.lastfmapp.model.TrackEntity;
 
 import java.util.List;
 
-public class TopTracksFragment extends Fragment implements ITopTracksContract.View{
+public class TopTracksFragment extends CoreMvpFragment<ITopTracksContract.Presenter>
+        implements ITopTracksContract.View{
 
-    private ITopTracksContract.Presenter mPresenter;
+
 
     private static final String ARG_CATEGORY_ID = "category_id";
 
@@ -31,18 +33,8 @@ public class TopTracksFragment extends Fragment implements ITopTracksContract.Vi
         return fragment;
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getArguments().getInt(ARG_CATEGORY_ID);
-        View v = inflater.inflate(R.layout.fragment_layout, container, false);
-        TextView textView = v.findViewById(R.id.text_name);
 
-        textView.setText("Top Tracks");
-        return v;
-    }
-
-     //region Contract
+    //region Contract
     @Override
     public void showTracks(List<TrackEntity> tracks) {
 
@@ -58,15 +50,14 @@ public class TopTracksFragment extends Fragment implements ITopTracksContract.Vi
 
     }
 
-
     @Override
-    public void finisView() {
-        getActivity().finish();
+    protected int getLayoutId() {
+        return R.layout.fragment_layout;
     }
 
     @Override
-    public void attachPresenter(ITopTracksContract.Presenter presenter) {
-        mPresenter = presenter;
+    protected void initView(View view) {
+        //TODO: Init
     }
     //endregion
 }

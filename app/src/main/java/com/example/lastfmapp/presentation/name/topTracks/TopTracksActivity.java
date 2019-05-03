@@ -3,6 +3,8 @@ package com.example.lastfmapp.presentation.name.topTracks;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.lastfmapp.App;
+
 public class TopTracksActivity extends AppCompatActivity {
 
     private ITopTracksContract.Presenter mPresenter;
@@ -18,8 +20,9 @@ public class TopTracksActivity extends AppCompatActivity {
                 .add(android.R.id.content, fragment)
                 .commit();
 
-        mPresenter = new TopTracksPresenter();
+        mPresenter = new TopTracksPresenter(App.tracksRepository);
         mPresenter.attachView(fragment);
+        mPresenter.getTracks();
     }
 
 

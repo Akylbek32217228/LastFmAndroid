@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.core.mvp.CoreMvpFragment;
 import com.example.lastfmapp.R;
 import com.example.lastfmapp.model.ArtistEntity;
 
 import java.util.List;
 
-public class TopArtistsFragment extends Fragment implements ITopArtistsContract.View{
+public class TopArtistsFragment extends CoreMvpFragment<ITopArtistsContract.Presenter>
+        implements ITopArtistsContract.View{
 
 
 
@@ -25,15 +27,9 @@ public class TopArtistsFragment extends Fragment implements ITopArtistsContract.
         return fragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.fragment_layout, container, false);
-        TextView textView = v.findViewById(R.id.text_name);
-        textView.setText("Top Artists");
-
-        return v;
+    protected void initView(View view) {
+        //TODO: init
     }
 
     @Override
@@ -57,7 +53,7 @@ public class TopArtistsFragment extends Fragment implements ITopArtistsContract.
     }
 
     @Override
-    public void attachPresenter(ITopArtistsContract.Presenter presenter) {
-
+    protected int getLayoutId() {
+        return R.layout.fragment_layout;
     }
 }

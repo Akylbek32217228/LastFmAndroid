@@ -1,11 +1,13 @@
 package com.example.core.mvp;
 
-public class CoreMvpPresenter implements ICoreMvpContract.Presenter{
+import android.support.annotation.Nullable;
 
-    private ICoreMvpContract.View mView;
+public abstract class CoreMvpPresenter<T extends ICoreMvpContract.View> implements ICoreMvpContract.Presenter<T>{
+    @Nullable
+    protected T mView;
 
     @Override
-    public void attachView(ICoreMvpContract.View view) {
+    public void attachView(T view) {
         mView = view;
         mView.attachPresenter(this);
     }

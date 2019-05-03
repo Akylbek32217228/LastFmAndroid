@@ -3,6 +3,7 @@ package com.example.lastfmapp.presentation.name.TopArtists;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.lastfmapp.App;
 import com.example.lastfmapp.R;
 import com.example.lastfmapp.model.ArtistEntity;
 
@@ -23,8 +24,9 @@ public class TopArtistsActivity extends AppCompatActivity{
                 .add(android.R.id.content, fragment)
                 .commit();
 
-        mPresenter = new TopArtistsPresenter();
+        mPresenter = new TopArtistsPresenter(App.artistsRepository);
         mPresenter.attachView(fragment);
+        mPresenter.getArtist();
     }
 
 
