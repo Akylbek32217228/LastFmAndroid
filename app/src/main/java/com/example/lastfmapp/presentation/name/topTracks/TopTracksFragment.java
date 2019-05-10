@@ -1,24 +1,31 @@
 package com.example.lastfmapp.presentation.name.topTracks;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.example.core.Logger;
 import com.example.core.mvp.CoreMvpFragment;
 import com.example.lastfmapp.R;
+import com.example.lastfmapp.model.ArtistEntity;
 import com.example.lastfmapp.model.TrackEntity;
+import com.example.lastfmapp.model.TrackImage;
+import com.example.lastfmapp.presentation.name.topTracks.recycler.TopTracksAdapter;
+import com.example.lastfmapp.presentation.name.topTracks.recycler.TopTracksViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TopTracksFragment extends CoreMvpFragment<ITopTracksContract.Presenter>
         implements ITopTracksContract.View{
 
+    TopTracksAdapter adapter;
+    TopTracksViewHolder viewHolder;
+    ArrayList<TrackEntity> list;
 
 
     private static final String ARG_CATEGORY_ID = "category_id";
@@ -37,7 +44,12 @@ public class TopTracksFragment extends CoreMvpFragment<ITopTracksContract.Presen
     //region Contract
     @Override
     public void showTracks(List<TrackEntity> tracks) {
-
+        Logger.d("showTracks");
+        Logger.d(tracks.size() + "");
+        for (TrackEntity track : tracks) {
+            Logger.d(track.toString());
+        }
+        adapter.setTracks(tracks);
     }
 
     @Override
@@ -52,12 +64,19 @@ public class TopTracksFragment extends CoreMvpFragment<ITopTracksContract.Presen
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_layout;
+        return R.layout.activity_top_tracks;
     }
 
     @Override
     protected void initView(View view) {
         //TODO: Init
+        Logger.d("initView");
+        RecyclerView recyclerView = getActivity().findViewById(R.id.top_tracks_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new TopTracksAdapter(new ArrayList<TrackEntity>());
+        Logger.d("dfdf");
+        recyclerView.setAdapter(adapter);
+        Logger.d("dfdffddfdfdfdfdfdf");
     }
     //endregion
 }

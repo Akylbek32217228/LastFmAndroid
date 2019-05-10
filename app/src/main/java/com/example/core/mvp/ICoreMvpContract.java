@@ -8,6 +8,8 @@ public interface ICoreMvpContract {
 
         void attachPresenter(T presenter);
 
+        void showMessage(String message);
+
     }
 
     interface Presenter<T extends View> {

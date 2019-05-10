@@ -1,23 +1,19 @@
 package com.example.lastfmapp.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ArtistEntity {
-
-    private int id;
+    @SerializedName("name")
     private String name;
-    private String image;
+    @SerializedName("mbid")
+    private String mbid;
+    @SerializedName("url")
+    private String url;
 
-    public ArtistEntity(int id, String name, String image) {
-        this.id = id;
+    public ArtistEntity(String name, String mbid, String url) {
         this.name = name;
-        this.image = image;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.mbid = mbid;
+        this.url = url;
     }
 
     public String getName() {
@@ -28,11 +24,24 @@ public class ArtistEntity {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getMbid() {
+        return mbid;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setMbid(String mbid) {
+        this.mbid = mbid;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + url;
     }
 }

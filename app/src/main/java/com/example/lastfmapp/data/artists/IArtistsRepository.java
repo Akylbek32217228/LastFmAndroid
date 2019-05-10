@@ -3,7 +3,6 @@ package com.example.lastfmapp.data.artists;
 import android.support.annotation.Nullable;
 
 import com.example.lastfmapp.model.ArtistEntity;
-import com.example.lastfmapp.model.TrackEntity;
 
 import java.util.List;
 

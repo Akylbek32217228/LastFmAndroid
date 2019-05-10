@@ -3,6 +3,7 @@ package com.example.lastfmapp.presentation.name.topTracks;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.core.Logger;
 import com.example.lastfmapp.App;
 
 public class TopTracksActivity extends AppCompatActivity {
@@ -12,7 +13,7 @@ public class TopTracksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Logger.d("TopTracksActivity");
         TopTracksFragment fragment = TopTracksFragment.newInstance();
 
         getSupportFragmentManager()

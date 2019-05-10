@@ -2,6 +2,7 @@ package com.example.lastfmapp.data.artists;
 
 import android.support.annotation.Nullable;
 
+import com.example.core.Logger;
 import com.example.lastfmapp.data.artists.local.IArtistsLocalStorage;
 import com.example.lastfmapp.data.artists.remote.IArtistsRemoteStorage;
 import com.example.lastfmapp.model.ArtistEntity;
@@ -28,18 +29,25 @@ public class ArtistsRepository implements IArtistsRepository {
 
     @Override
     public void getArtists(final ArtistsCallback callback) {
-        local.getArtists(callback);
-        remote.getArtists(new ArtistsCallback() {
-            @Override
-            public void onSucces(List<ArtistEntity> artists) {
-                local.setArtists(artists);
-                callback.onSucces(artists);
-            }
+        if (local != null) {
+            local.getArtists(callback);
+        }
 
-            @Override
-            public void onFailure(String message) {
-                callback.onFailure(message);
-            }
-        });
+        if (remote != null) {
+            remote.getArtists(new ArtistsCallback() {
+                @Override
+                public void onSucces(List<ArtistEntity> artists) {
+                    Logger.d(artists.get(0).getName() + "NAMEEEEE");
+                    local.setArtists(artists);
+
+                    callback.onSucces(artists);
+                }
+
+                @Override
+                public void onFailure(String message) {
+                    callback.onFailure(message);
+                }
+            });
+        }
     }
 }

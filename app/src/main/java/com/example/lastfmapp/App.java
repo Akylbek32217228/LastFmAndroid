@@ -9,7 +9,7 @@ import com.example.lastfmapp.data.artists.remote.ArtistsRemoteStorage;
 import com.example.lastfmapp.data.tracks.ITracksRepository;
 import com.example.lastfmapp.data.tracks.TracksRepository;
 import com.example.lastfmapp.data.tracks.local.TracksLocalStorage;
-import com.example.lastfmapp.data.tracks.remote.RemoteTracksStorage;
+import com.example.lastfmapp.data.tracks.remote.TracksRemoteStorage;
 
 public class App extends Application {
 
@@ -22,6 +22,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         artistsRepository = new ArtistsRepository(new ArtistsLocalStorage(), new ArtistsRemoteStorage());
-        tracksRepository = new TracksRepository(new TracksLocalStorage(), new RemoteTracksStorage());
+        tracksRepository = new TracksRepository(new TracksLocalStorage(), new TracksRemoteStorage());
     }
 }

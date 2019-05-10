@@ -2,14 +2,16 @@ package com.example.lastfmapp.presentation.name.topTracks;
 
 
 
+import android.util.Log;
+
+import com.example.core.Logger;
 import com.example.core.mvp.CoreMvpPresenter;
 import com.example.lastfmapp.data.tracks.ITracksRepository;
 import com.example.lastfmapp.model.TrackEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class  TopTracksPresenter extends CoreMvpPresenter<ITopTracksContract.View>
+public class TopTracksPresenter extends CoreMvpPresenter<ITopTracksContract.View>
         implements ITopTracksContract.Presenter {
 
     private ITracksRepository repository;
@@ -21,11 +23,13 @@ public class  TopTracksPresenter extends CoreMvpPresenter<ITopTracksContract.Vie
     @Override
     public void getTracks() {
         //TODO: Get tracks from Repository
+        Logger.d("getTracksTopTracksPresenter");
         repository.getTracks(new ITracksRepository.TracksCallback() {
             @Override
             public void onSucces(List<TrackEntity> tracks) {
                 if ( mView != null) {
                     mView.showTracks(tracks);
+
                 }
             }
 

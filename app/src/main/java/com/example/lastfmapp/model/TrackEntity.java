@@ -1,17 +1,79 @@
 package com.example.lastfmapp.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class TrackEntity {
     private int id;
-    private String name;
-    private String artist;
-    private String image;
 
-    public TrackEntity(int id, String name, String artist, String image) {
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("artist")
+    private ArtistEntity artist;
+
+    @SerializedName("url")
+    private String url;
+
+    @SerializedName("playcount")
+    private String playcount;
+
+    @SerializedName("listeners")
+    private String listeners;
+
+    /*@SerializedName("image")
+    private List<TrackImage> image;*/
+
+    public TrackEntity(int id, String name, ArtistEntity artist, String url, String playcount, String listeners, List<TrackImage> image) {
         this.id = id;
         this.name = name;
         this.artist = artist;
-        this.image = image;
+        this.url = url;
+        this.playcount = playcount;
+        this.listeners = listeners;
+        //this.image = image;
     }
+
+    public ArtistEntity getArtist() {
+        return artist;
+    }
+
+    public void setArtist(ArtistEntity artist) {
+        this.artist = artist;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getPlaycount() {
+        return playcount;
+    }
+
+    public void setPlaycount(String playcount) {
+        this.playcount = playcount;
+    }
+
+    public String getListeners() {
+        return listeners;
+    }
+
+    public void setListeners(String listeners) {
+        this.listeners = listeners;
+    }
+
+    /*public List<TrackImage> getImage() {
+        return image;
+    }
+
+    public void setImage(List<TrackImage> image) {
+        this.image = image;
+    }*/
 
     public int getId() {
         return id;
@@ -29,24 +91,8 @@ public class TrackEntity {
         this.name = name;
     }
 
-    public String getArtist() {
-        return artist;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     @Override
     public String toString() {
-        return id + " " + name + " " + artist + " " + image;
+        return id + " " + name + " " + artist;
     }
 }

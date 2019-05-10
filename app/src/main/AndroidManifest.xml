@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.lastfmapp">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".App"
@@ -9,9 +12,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="com.example.core.mvp.CoreMvpActivity"></activity>
-        <activity android:name=".presentation.name.Track.TrackActivity" />
+        <activity android:name=".presentation.name.Track.TrackActivity"/>
         <activity android:name=".presentation.name.Artist.ArtistActivity" />
         <activity android:name=".presentation.name.TopArtists.TopArtistsActivity" />
         <activity android:name=".presentation.name.main.MainActivity">

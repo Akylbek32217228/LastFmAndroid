@@ -10,4 +10,10 @@ public class TrackPresenter extends CoreMvpPresenter<ITrackContract.View> implem
     public TrackPresenter(ITracksRepository repository) {
         this.repository = repository;
     }
+
+    @Override
+    public void getTrack(String track, String artist) {
+
+        //repository.getTrack(0 , track, artist);
+    }
 }

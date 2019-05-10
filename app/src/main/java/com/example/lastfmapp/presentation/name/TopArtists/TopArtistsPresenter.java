@@ -4,7 +4,6 @@ import com.example.core.mvp.CoreMvpPresenter;
 import com.example.lastfmapp.data.artists.IArtistsRepository;
 import com.example.lastfmapp.model.ArtistEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TopArtistsPresenter extends CoreMvpPresenter<ITopArtistsContract.View>

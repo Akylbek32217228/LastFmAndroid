@@ -1,7 +1,6 @@
 package com.example.lastfmapp.presentation.name.Track;
 
 import com.example.core.mvp.ICoreMvpContract;
-import com.example.lastfmapp.model.TrackEntity;
 
 public interface ITrackContract{
 
@@ -13,7 +12,7 @@ public interface ITrackContract{
 
     interface Presenter extends ICoreMvpContract.Presenter<View>{
 
-
+        void getTrack(String track, String artist);
     }
 
 }

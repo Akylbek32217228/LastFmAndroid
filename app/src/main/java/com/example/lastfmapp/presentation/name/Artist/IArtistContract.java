@@ -2,7 +2,7 @@ package com.example.lastfmapp.presentation.name.Artist;
 
 import com.example.core.mvp.ICoreMvpContract;
 
-public interface IArtistContract {
+public interface  IArtistContract {
 
     interface View extends ICoreMvpContract.View<Presenter> {
 

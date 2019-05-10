@@ -12,14 +12,23 @@ import com.example.lastfmapp.R;
 
 public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> implements ITrackContract.View{
 
-    private ITrackContract.Presenter presenter;
+    String track;
+    String artist;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track);
+    protected ITrackContract.Presenter providPresenter() {
+        return new TrackPresenter(App.tracksRepository);
+    }
 
-        presenter = new TrackPresenter(App.tracksRepository);
-        presenter.attachView(this);
+    @Override
+    protected void initView() {
+        track = getIntent().getStringExtra("key_track");
+        artist = getIntent().getStringExtra("key_artist");
+        //presenter.getTrack(track, artist);
+    }
+
+    @Override
+    protected int getActivityId() {
+        return R.layout.activity_track;
     }
 }
