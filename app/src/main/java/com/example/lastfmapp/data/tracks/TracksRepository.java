@@ -5,8 +5,9 @@ import android.support.annotation.Nullable;
 import com.example.core.Logger;
 import com.example.lastfmapp.data.tracks.local.ITracksLocalStorage;
 import com.example.lastfmapp.data.tracks.remote.ITracksRemoteStorage;
-import com.example.lastfmapp.model.TrackEntity;
+import com.example.lastfmapp.model.Track;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class TracksRepository implements ITracksRepository {
@@ -15,32 +16,39 @@ public class TracksRepository implements ITracksRepository {
     @Nullable
     private ITracksRemoteStorage remote;
 
+    private HashMap<String, Track> mCache = new HashMap<>();
 
     public TracksRepository(ITracksLocalStorage local, ITracksRemoteStorage remotes) {
         this.local = local;
         this.remote = remotes;
     }
 
-    /*@Nullable
-    @Override
-    public TrackEntity getTrack(int id, String track, String artist, final TrackCallback callback) {
-        if (local != null) {
-            local.getTrack(callback);
-        }
-
-        return null;
-    }*/
-
 
     @Nullable
     @Override
-    public TrackEntity getTrack(int id, String track, String artist, TracksCallback callback) {
-        return null;
+    public Track getTrack(String uniqueId) {
+        Track track = mCache.get(uniqueId);
+        Logger.d("getTrackRepository");
+
+        if ( track != null && local != null) {
+            track = local.getTrack(uniqueId);
+            Logger.d("getTrackRepository");
+        }
+        return track;
+    }
+
+    private void setCache(List<Track> tracks) {
+        if (local != null) {
+            local.setTracks(tracks);
+        }
+
+        for(Track track : tracks) {
+            mCache.put(track.getUniqueId(), track);
+        }
     }
 
     @Override
-    public void getTracks(final TracksCallback callback) {
-        Logger.d("getTracksTracksRepository");
+    public void getTopTracks(final TracksCallback callback) {
         if (local != null) {
             local.getTracks(callback);
         }
@@ -48,9 +56,8 @@ public class TracksRepository implements ITracksRepository {
         if (remote != null) {
             remote.getTracks(new TracksCallback() {
                 @Override
-                public void onSucces(List<TrackEntity> tracks) {
-                    Logger.d("onSuccesTrackRepository");
-                    local.setTracks(tracks);
+                public void onSucces(List<Track> tracks) {
+                    setCache(tracks);
 
                     callback.onSucces(tracks);
                 }
@@ -63,6 +70,10 @@ public class TracksRepository implements ITracksRepository {
         }
     }
 
+    @Override
+    public void getArtistTopTracks(String artistName, TracksCallback callback) {
+        //TODO: Fetch artist top tracks
+    }
 
 
 }

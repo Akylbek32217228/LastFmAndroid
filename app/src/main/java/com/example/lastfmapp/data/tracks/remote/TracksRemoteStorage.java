@@ -71,14 +71,5 @@ public class TracksRemoteStorage implements ITracksRemoteStorage {
                 @Query("page") int page,
                 @Query("limit") int limit
         );
-
-        @GET("/2.0/")
-        Call<TracksResponse> getTrack(
-                @Query("method") String method,
-                @Query("api_key") String apiKey,
-                @Query("format") String format,
-                @Query("page") int page,
-                @Query("limit") int limit
-        );
     }
 }

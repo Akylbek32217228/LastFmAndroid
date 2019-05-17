@@ -3,18 +3,18 @@ package com.example.lastfmapp.data.tracks;
 import android.support.annotation.Nullable;
 
 import com.example.core.mvp.CoreCallback;
-import com.example.lastfmapp.model.TrackEntity;
+import com.example.lastfmapp.model.Track;
 
 import java.util.List;
 
 public interface  ITracksRepository {
     @Nullable
-    TrackEntity getTrack(int id, String track, String artist, TracksCallback callback);
+    Track getTrack(String uniqueId);
 
-    void getTracks(TracksCallback callback);
+    void getTopTracks(TracksCallback callback);
 
-    interface TracksCallback extends CoreCallback<List<TrackEntity>> {}
+    void getArtistTopTracks(String artistName, TracksCallback callback);
 
-    interface TrackCallback extends CoreCallback<TrackEntity> {}
+    interface TracksCallback extends CoreCallback<List<Track>> {}
 
 }

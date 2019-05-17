@@ -16,4 +16,9 @@ public abstract class CoreMvpPresenter<T extends ICoreMvpContract.View> implemen
     public void detachView() {
         mView = null;
     }
+
+    @Override
+    public void onViewCreated() {
+
+    }
 }

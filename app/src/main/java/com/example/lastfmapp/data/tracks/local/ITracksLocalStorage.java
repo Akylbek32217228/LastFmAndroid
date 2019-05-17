@@ -1,16 +1,16 @@
 package com.example.lastfmapp.data.tracks.local;
 
 import com.example.lastfmapp.data.tracks.ITracksRepository;
-import com.example.lastfmapp.model.TrackEntity;
+import com.example.lastfmapp.model.Track;
 
 import java.util.List;
 
 public interface ITracksLocalStorage {
     void getTracks(ITracksRepository.TracksCallback callback);
 
-    void setTracks(List<TrackEntity> tracks);
+    void setTracks(List<Track> tracks);
 
-    void getTrack(ITracksRepository.TrackCallback callback);
+    Track getTrack(String uniqueId);
 
-    void setTrack(TrackEntity track);
+    void setTrack(Track track);
 }

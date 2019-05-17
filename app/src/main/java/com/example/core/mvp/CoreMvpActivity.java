@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.core.CoreUtils;
-import com.example.lastfmapp.R;
 
 public abstract class CoreMvpActivity<T extends ICoreMvpContract.Presenter> extends AppCompatActivity
     implements ICoreMvpContract.View<T>{
@@ -22,18 +21,19 @@ public abstract class CoreMvpActivity<T extends ICoreMvpContract.Presenter> exte
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getActivityId());
+        setContentView(getLayoutId());
 
         initView();
 
-        presenter = providPresenter();
+        presenter = providePresenter();
         if ( presenter != null) {
             presenter.attachView(this);
+            presenter.onViewCreated();
         }
 
     }
 
-    protected abstract T providPresenter();
+    protected abstract T providePresenter();
 
     protected abstract void initView();
 
@@ -48,7 +48,7 @@ public abstract class CoreMvpActivity<T extends ICoreMvpContract.Presenter> exte
     }
 
     @LayoutRes
-    protected abstract int getActivityId();
+    protected abstract int getLayoutId();
 
 
 

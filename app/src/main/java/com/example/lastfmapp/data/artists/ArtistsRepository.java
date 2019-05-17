@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import com.example.core.Logger;
 import com.example.lastfmapp.data.artists.local.IArtistsLocalStorage;
 import com.example.lastfmapp.data.artists.remote.IArtistsRemoteStorage;
-import com.example.lastfmapp.model.ArtistEntity;
+import com.example.lastfmapp.model.Artist;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class ArtistsRepository implements IArtistsRepository {
 
     @Nullable
     @Override
-    public ArtistEntity getArtist(int id) {
+    public Artist getArtist(int id) {
         return null;
     }
 
@@ -36,7 +36,7 @@ public class ArtistsRepository implements IArtistsRepository {
         if (remote != null) {
             remote.getArtists(new ArtistsCallback() {
                 @Override
-                public void onSucces(List<ArtistEntity> artists) {
+                public void onSucces(List<Artist> artists) {
                     Logger.d(artists.get(0).getName() + "NAMEEEEE");
                     local.setArtists(artists);
 

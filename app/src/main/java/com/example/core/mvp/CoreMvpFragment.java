@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.core.CoreUtils;
+
 public abstract class CoreMvpFragment<T extends ICoreMvpContract.Presenter>
         extends Fragment implements ICoreMvpContract.View<T>{
 
@@ -38,6 +40,10 @@ public abstract class CoreMvpFragment<T extends ICoreMvpContract.Presenter>
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
+
+        if (presenter != null) {
+            presenter.onViewCreated();
+        }
     }
 
     protected abstract void initView(View view);
@@ -45,5 +51,10 @@ public abstract class CoreMvpFragment<T extends ICoreMvpContract.Presenter>
     @Override
     public void attachPresenter(T presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void showMessage(String message) {
+        CoreUtils.showShortToast(getContext(), message);
     }
 }

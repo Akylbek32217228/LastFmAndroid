@@ -18,6 +18,7 @@ public interface ICoreMvpContract {
 
         void detachView();
 
+        void onViewCreated();
     }
 
 }
