@@ -48,7 +48,7 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksViewHolder> 
 
     public void setTracks(List<Track> tracks) {
         mlist.clear();
-        mlist .addAll(tracks);
+        mlist.addAll(tracks);
         notifyDataSetChanged();
     }
 }

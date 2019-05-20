@@ -1,5 +1,7 @@
 package com.example.lastfmapp.presentation.track;
 
+import android.util.Log;
+
 import com.example.core.Logger;
 import com.example.core.mvp.CoreMvpPresenter;
 import com.example.lastfmapp.data.tracks.ITracksRepository;
@@ -18,9 +20,8 @@ public class TrackPresenter extends CoreMvpPresenter<ITrackContract.View> implem
     @Override
     public void onViewCreated() {
         super.onViewCreated();
-        Logger.d("onViewCreatedTrackPresenter");
+        Logger.d("onViewCreatedTrackPresenter " + "      " + uniqueId);
         Track track = repository.getTrack(uniqueId);
-
         if (mView != null && track != null) {
             mView.showTrack(track);
         }

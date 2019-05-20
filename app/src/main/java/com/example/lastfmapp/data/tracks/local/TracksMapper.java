@@ -1,6 +1,7 @@
 package com.example.lastfmapp.data.tracks.local;
 
 import com.example.lastfmapp.data.common.RImage;
+import com.example.lastfmapp.model.Artist;
 import com.example.lastfmapp.model.Image;
 import com.example.lastfmapp.model.Track;
 
@@ -13,23 +14,28 @@ public class TracksMapper {
 
     static RTrack toRTrack(Track track) {
         RealmList<RImage> images = new RealmList<>();
-
+        RTrackArtist trackArtist = new RTrackArtist(track.getArtist().getName(), track.getArtist().getMbid(),
+                track.getArtist().getUrl());
         for (Image image : track.getImage()) {
             images.add(new RImage(image.getUrl(), image.getSize()));
         }
 
         return new RTrack(
+                track.getUniqueId(),
                 track.getName(),
                 track.getUrl(),
                 track.getPlaycount(),
                 track.getListeners(),
-                track.getUniqueId(),
+                trackArtist,
                 images
         );
     }
 
     static Track toTrack(RTrack track) {
         ArrayList<Image> images = new ArrayList<>();
+        Artist artist = new Artist(track.getArtist().getName(),
+                track.getArtist().getMbid(),
+                track.getArtist().getUrl());
 
         for (RImage image : track.getImages()) {
             images.add(new Image(image.getUrl(), image.getSize()));
@@ -37,7 +43,7 @@ public class TracksMapper {
 
         return new Track(
                 track.getName(),
-                null,
+                artist,
                 track.getUrl(),
                 track.getPlaycount(),
                 track.getListeners(),

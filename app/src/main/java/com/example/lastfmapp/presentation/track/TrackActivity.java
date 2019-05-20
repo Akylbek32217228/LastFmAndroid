@@ -52,7 +52,6 @@ public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> imp
 
     @Override
     public void showTrack(Track track) {
-        Logger.d(track.getName() + "dfdfdfd");
         trackName.setText(track.getName());
         artistName.setText(track.getArtist().getName());
     }

@@ -55,9 +55,9 @@ public class TracksLocalStorage extends CoreRealmDataSourse implements ITracksLo
 
     @Override
     public void setTracks(List<Track> tracks) {
-        this.tracks.addAll(tracks);
-        /*final List<RTrack> rTracks = TracksMapper.toRTracks(tracks);
-
+        //this.tracks.addAll(tracks);
+        Logger.d("     " + "setTrack from database      ");
+        final List<RTrack> rTracks = TracksMapper.toRTracks(tracks);
         executeTransanction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -75,10 +75,10 @@ public class TracksLocalStorage extends CoreRealmDataSourse implements ITracksLo
                     }
                 }
 
-//                managedTrack.getImages().deleteAllFromRealm();
-//                managedTrack.deleteFromRealm();
+                //managedTrack.getImages().deleteAllFromRealm();
+                //managedTrack.deleteFromRealm();
             }
-        });*/
+        });
 
     }
 
@@ -89,7 +89,7 @@ public class TracksLocalStorage extends CoreRealmDataSourse implements ITracksLo
         RTrack rTrack;
         Logger.d("getTrackTracksLocalStorage");
 
-        /*try {
+        try {
             realm = getRealmInStance();
             rTrack = realm.where(RTrack.class).equalTo("uniqueId", uniqueId).findFirst();
             if ( rTrack != null) {
@@ -103,13 +103,13 @@ public class TracksLocalStorage extends CoreRealmDataSourse implements ITracksLo
             if (realm != null) {
                 realm.close();
             }
-        }*/
+        }
 
-        for ( int i =0; i < tracks.size(); ++i) {
+        /*for ( int i =0; i < tracks.size(); ++i) {
             if ( tracks.get(i).getUniqueId().equals(uniqueId)) {
                 track = tracks.get(i);
             }
-        }
+        }*/
 
         return track;
     }

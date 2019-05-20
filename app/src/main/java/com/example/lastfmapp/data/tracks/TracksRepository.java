@@ -28,8 +28,7 @@ public class TracksRepository implements ITracksRepository {
     @Override
     public Track getTrack(String uniqueId) {
         Track track = mCache.get(uniqueId);
-        Logger.d("getTrackRepository");
-
+        Logger.d("        " +  track.getUniqueId() + "         ");
         if ( track != null && local != null) {
             track = local.getTrack(uniqueId);
             Logger.d("getTrackRepository");

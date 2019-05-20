@@ -11,7 +11,7 @@
         android:text="NAME"
         android:textSize="20sp"
         android:paddingTop="20dp"
-        android:paddingBottom="30dp"/>
+        android:paddingBottom="10dp"/>
 
     <TextView
         android:id="@+id/top_trackartist_name"
@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:text="artists"
         android:textSize="20sp"
-        android:layout_below="@+id/top_tracks_name"/>
+        android:layout_below="@+id/top_tracks_name"
+        android:paddingBottom="30dp"/>
 
 
 </RelativeLayout>

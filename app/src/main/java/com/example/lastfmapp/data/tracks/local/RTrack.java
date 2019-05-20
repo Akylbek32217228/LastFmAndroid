@@ -16,18 +16,22 @@ public class RTrack extends RealmObject {
     private String playcount;
     private String listeners;
     private RealmList<RImage> images;
+    private RTrackArtist artist;
 
 
     public RTrack() {
     }
 
-    public RTrack(String uniqueId, String name, String url, String playcount, String listeners, RealmList<RImage> images) {
+    public RTrack(String uniqueId, String name, String url, String playcount, String listeners,
+                  RTrackArtist artist,
+                  RealmList<RImage> images) {
         this.uniqueId = uniqueId;
         this.name = name;
         this.url = url;
         this.playcount = playcount;
         this.listeners = listeners;
         this.images = images;
+        this.artist = artist;
     }
 
     public String getUniqueId() {
@@ -77,4 +81,14 @@ public class RTrack extends RealmObject {
     public void setImages(RealmList<RImage> images) {
         this.images = images;
     }
+
+    public RTrackArtist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(RTrackArtist artist) {
+        this.artist = artist;
+    }
+
+
 }
