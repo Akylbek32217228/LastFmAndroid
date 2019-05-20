@@ -1,6 +1,8 @@
 package com.example.lastfmapp.data.tracks.local;
 
 import com.example.lastfmapp.data.common.RImage;
+import com.example.lastfmapp.data.tracks.local.RObjects.RTrack;
+import com.example.lastfmapp.data.tracks.local.RObjects.RTrackArtist;
 import com.example.lastfmapp.model.Artist;
 import com.example.lastfmapp.model.Image;
 import com.example.lastfmapp.model.Track;

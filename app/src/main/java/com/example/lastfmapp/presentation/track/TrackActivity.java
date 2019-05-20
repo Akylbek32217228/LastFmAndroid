@@ -40,7 +40,6 @@ public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> imp
     @Override
     protected void initView() {
         //presenter.getTrack(track, artist);
-        Logger.d("initViewTrackActivity");
         trackName = findViewById(R.id.track_name);
         artistName = findViewById(R.id.artist_name);
     }
@@ -54,5 +53,11 @@ public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> imp
     public void showTrack(Track track) {
         trackName.setText(track.getName());
         artistName.setText(track.getArtist().getName());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

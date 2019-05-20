@@ -3,6 +3,7 @@ package com.example.lastfmapp.data.tracks.remote;
 import android.util.Log;
 
 import com.example.core.Logger;
+import com.example.lastfmapp.BuildConfig;
 import com.example.lastfmapp.data.tracks.ITracksRepository;
 import com.example.lastfmapp.data.tracks.remote.model.TracksResponse;
 
@@ -16,8 +17,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public class TracksRemoteStorage implements ITracksRemoteStorage {
-    private final static String BASE_URL = "http://ws.audioscrobbler.com";
-    private final static String API_KEY = "f4cd93850ae865628f18f6d2af27c3c4";
+    private final static String BASE_URL = BuildConfig.BASE_URL;
+    private final static String API_KEY = BuildConfig.API_KEY;
 
     public static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)

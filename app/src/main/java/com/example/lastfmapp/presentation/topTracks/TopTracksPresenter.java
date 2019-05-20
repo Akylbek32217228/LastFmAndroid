@@ -67,4 +67,11 @@ public class TopTracksPresenter extends CoreMvpPresenter<ITopTracksContract.View
         }
     }
 
+    @Override
+    public void onArtistClick(int pos) {
+        if ( mView != null) {
+            mView.openArtistDetails(mCache.get(pos).getArtist());
+        }
+    }
+
 }

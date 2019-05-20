@@ -13,4 +13,6 @@ public interface ITracksLocalStorage {
     Track getTrack(String uniqueId);
 
     void setTrack(Track track);
+
+    void getArtistTracks(String artistName, ITracksRepository.TracksCallback callback);
 }

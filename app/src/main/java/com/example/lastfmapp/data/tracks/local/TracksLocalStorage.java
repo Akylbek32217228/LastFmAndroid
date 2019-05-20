@@ -3,6 +3,8 @@ package com.example.lastfmapp.data.tracks.local;
 import com.example.core.Logger;
 import com.example.core.realm.CoreRealmDataSourse;
 import com.example.lastfmapp.data.tracks.ITracksRepository;
+import com.example.lastfmapp.data.tracks.local.RObjects.RTrack;
+import com.example.lastfmapp.data.tracks.local.RObjects.RTrackArtist;
 import com.example.lastfmapp.model.Track;
 
 import java.util.ArrayList;
@@ -15,11 +17,14 @@ public class TracksLocalStorage extends CoreRealmDataSourse implements ITracksLo
 
     ArrayList<Track> tracks = new ArrayList<>();
 
-    private void getArtistTracks(String artistName, ITracksRepository.TracksCallback callback) {
+    public void getArtistTracks(String artistName, ITracksRepository.TracksCallback callback) {
         Realm realm = null;
 
         try {
             realm = getRealmInStance();
+
+            RealmResults<RTrack> results = realm.where(RTrack.class).contains("uniqueId", artistName).findAll();
+            callback.onSucces(TracksMapper.toTracks(realm.copyFromRealm(results)));
 
             //TODO: Search tracks by artistName
         } catch (Exception e) {

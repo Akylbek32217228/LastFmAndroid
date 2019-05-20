@@ -24,11 +24,18 @@ public class TopTracksViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
+        artistName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onArtistClick(getAdapterPosition());
+            }
+        });
+
     }
 
     public interface TopTrackListener {
         void onTrackClick(int pos);
-
+        void onArtistClick(int pos);
     }
 
 

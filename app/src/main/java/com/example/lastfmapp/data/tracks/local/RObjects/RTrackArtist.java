@@ -1,4 +1,4 @@
-package com.example.lastfmapp.data.tracks.local;
+package com.example.lastfmapp.data.tracks.local.RObjects;
 
 import io.realm.RealmObject;
 

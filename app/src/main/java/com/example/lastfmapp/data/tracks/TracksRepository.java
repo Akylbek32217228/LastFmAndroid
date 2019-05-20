@@ -72,6 +72,10 @@ public class TracksRepository implements ITracksRepository {
     @Override
     public void getArtistTopTracks(String artistName, TracksCallback callback) {
         //TODO: Fetch artist top tracks
+        if ( local != null) {
+            local.getArtistTracks(artistName,callback);
+        }
+
     }
 
 

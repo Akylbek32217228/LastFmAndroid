@@ -2,6 +2,7 @@ package com.example.lastfmapp.presentation.topTracks;
 
 
 import com.example.core.mvp.ICoreMvpContract;
+import com.example.lastfmapp.model.Artist;
 import com.example.lastfmapp.model.Track;
 
 import java.util.List;
@@ -15,6 +16,9 @@ public interface ITopTracksContract {
 
         void openTrackDetails(Track track);
 
+
+        void openArtistDetails(Artist artist);
+
         void startRefresh();
 
         void stopRefresh();
@@ -26,5 +30,6 @@ public interface ITopTracksContract {
 
         void onTrackClick(int position);
 
+        void onArtistClick(int pos);
     }
 }

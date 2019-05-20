@@ -11,7 +11,9 @@ import android.view.View;
 import com.example.core.Logger;
 import com.example.core.mvp.CoreMvpFragment;
 import com.example.lastfmapp.R;
+import com.example.lastfmapp.model.Artist;
 import com.example.lastfmapp.model.Track;
+import com.example.lastfmapp.presentation.artist.ArtistActivity;
 import com.example.lastfmapp.presentation.topTracks.recycler.TopTracksAdapter;
 import com.example.lastfmapp.presentation.topTracks.recycler.TopTracksViewHolder;
 import com.example.lastfmapp.presentation.track.TrackActivity;
@@ -51,6 +53,13 @@ public class TopTracksFragment extends CoreMvpFragment<ITopTracksContract.Presen
     public void openTrackDetails(Track track) {
         if ( getActivity() != null) {
             TrackActivity.start(getActivity(), track.getUniqueId());
+        }
+    }
+
+    @Override
+    public void openArtistDetails(Artist artist) {
+        if ( getActivity() != null) {
+            ArtistActivity.start(getActivity(), artist.getName());
         }
     }
 
@@ -101,6 +110,13 @@ public class TopTracksFragment extends CoreMvpFragment<ITopTracksContract.Presen
     public void onTrackClick(int pos) {
         if ( presenter != null) {
             presenter.onTrackClick(pos);
+        }
+    }
+
+    @Override
+    public void onArtistClick(int pos) {
+        if ( presenter != null) {
+            presenter.onArtistClick(pos);
         }
     }
     //endregion
