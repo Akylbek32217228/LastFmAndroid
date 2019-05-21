@@ -6,6 +6,9 @@ import com.example.lastfmapp.data.artists.ArtistsRepository;
 import com.example.lastfmapp.data.artists.IArtistsRepository;
 import com.example.lastfmapp.data.artists.local.ArtistsLocalStorage;
 import com.example.lastfmapp.data.artists.remote.ArtistsRemoteStorage;
+import com.example.lastfmapp.data.lyrics.ILyricsRepository;
+import com.example.lastfmapp.data.lyrics.LyricsRepository;
+import com.example.lastfmapp.data.lyrics.remote.LyricsRemoteStorage;
 import com.example.lastfmapp.data.tracks.ITracksRepository;
 import com.example.lastfmapp.data.tracks.TracksRepository;
 import com.example.lastfmapp.data.tracks.local.TracksLocalStorage;
@@ -18,6 +21,7 @@ public class App extends Application {
 
     public static ITracksRepository tracksRepository;
     public static IArtistsRepository artistsRepository;
+    public static ILyricsRepository lyricsRepository;
 
 
 
@@ -28,6 +32,7 @@ public class App extends Application {
         initRealm();
         artistsRepository = new ArtistsRepository(new ArtistsLocalStorage(), new ArtistsRemoteStorage());
         tracksRepository = new TracksRepository(new TracksLocalStorage(), new TracksRemoteStorage());
+        lyricsRepository = new LyricsRepository(new LyricsRemoteStorage());
     }
 
     private void initRealm() {

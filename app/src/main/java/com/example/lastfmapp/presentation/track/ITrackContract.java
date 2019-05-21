@@ -7,6 +7,10 @@ public interface ITrackContract{
 
     interface View extends ICoreMvpContract.View<Presenter> {
         void showTrack(Track track);
+
+        void showLyrics(String lyrics);
+
+        void setVisibility(boolean visible);
         //void openTrack(Track track);
 
     }

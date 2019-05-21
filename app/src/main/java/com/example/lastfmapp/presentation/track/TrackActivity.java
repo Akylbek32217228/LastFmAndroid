@@ -2,6 +2,7 @@ package com.example.lastfmapp.presentation.track;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.core.Logger;
@@ -14,12 +15,14 @@ public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> imp
 
     TextView trackName;
     TextView artistName;
+    TextView textViewLyrics;
+    ProgressBar progressBar;
     private static final String EXTRA_TRACK_ID = "track_id";
     private static final String EXTRA_TRACK_UNIQUEID = "unique_id";
 
     @Override
     protected ITrackContract.Presenter providePresenter() {
-        return new TrackPresenter(App.tracksRepository, getTrackUniqueId(getIntent()));
+        return new TrackPresenter(App.tracksRepository, App.lyricsRepository, getTrackUniqueId(getIntent()));
     }
 
     public static void start(
@@ -42,6 +45,8 @@ public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> imp
         //presenter.getTrack(track, artist);
         trackName = findViewById(R.id.track_name);
         artistName = findViewById(R.id.artist_name);
+        textViewLyrics = findViewById(R.id.track_lyrics);
+        progressBar = findViewById(R.id.activity_track_progress_bar);
     }
 
     @Override
@@ -53,6 +58,21 @@ public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> imp
     public void showTrack(Track track) {
         trackName.setText(track.getName());
         artistName.setText(track.getArtist().getName());
+    }
+
+    @Override
+    public void showLyrics(String lyrics) {
+        textViewLyrics.setText(lyrics);
+    }
+
+    @Override
+    public void setVisibility(boolean visible) {
+        if ( visible) {
+            progressBar.setVisibility(ProgressBar.VISIBLE);
+        } else {
+            progressBar.setVisibility(ProgressBar.INVISIBLE);
+        }
+
     }
 
     @Override

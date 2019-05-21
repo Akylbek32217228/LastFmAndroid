@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public class TracksRemoteStorage implements ITracksRemoteStorage {
+public class  TracksRemoteStorage implements ITracksRemoteStorage {
     private final static String BASE_URL = BuildConfig.BASE_URL;
     private final static String API_KEY = BuildConfig.API_KEY;
 
@@ -29,7 +29,6 @@ public class TracksRemoteStorage implements ITracksRemoteStorage {
 
     @Override
     public void getTracks(final ITracksRepository.TracksCallback callback) {
-        Logger.d("getTracksTrackRemoteStorage");
         Call<TracksResponse> call = client.getTracks(
                 "chart.getTopTracks",
                 API_KEY,
@@ -41,7 +40,6 @@ public class TracksRemoteStorage implements ITracksRemoteStorage {
         call.enqueue(new Callback<TracksResponse>() {
             @Override
             public void onResponse(Call<TracksResponse> call, Response<TracksResponse> response) {
-                Logger.d("1234");
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         callback.onSucces(response.body().getTracks().getData());
@@ -55,7 +53,6 @@ public class TracksRemoteStorage implements ITracksRemoteStorage {
 
             @Override
             public void onFailure(Call<TracksResponse> call, Throwable t) {
-                Logger.d("987");
                 callback.onFailure("Top tracks failure: " + t.getMessage());
             }
         });

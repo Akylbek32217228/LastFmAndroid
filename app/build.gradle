@@ -12,8 +12,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_URL", "http://ws.audioscrobbler.com"
-        buildConfigField STRING, "API_KEY", "f4cd93850ae865628f18f6d2af27c3c4"
+        buildConfigField "String", "BASE_URL", "\"http://ws.audioscrobbler.com\""
+        buildConfigField STRING, "API_KEY", "\"f4cd93850ae865628f18f6d2af27c3c4\""
     }
     buildTypes {
 
