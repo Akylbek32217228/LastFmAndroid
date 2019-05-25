@@ -1,13 +1,9 @@
 package com.example.lastfmapp.presentation.artist;
 
-import com.example.core.Logger;
 import com.example.core.mvp.CoreMvpPresenter;
-import com.example.lastfmapp.data.artists.IArtistsRepository;
 import com.example.lastfmapp.data.tracks.ITracksRepository;
-import com.example.lastfmapp.model.Artist;
 import com.example.lastfmapp.model.Track;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ArtistPresenter extends CoreMvpPresenter<IArtistContract.View> implements IArtistContract.Presenter{
@@ -23,13 +19,14 @@ public class ArtistPresenter extends CoreMvpPresenter<IArtistContract.View> impl
     @Override
     public void onViewCreated() {
         super.onViewCreated();
-
+        if ( mView != null) {
+            mView.showArtistName(name);
+        }
         repository.getArtistTopTracks(name, new ITracksRepository.TracksCallback() {
             @Override
             public void onSucces(List<Track> result) {
-                Logger.d(result.size() + " size");
-                if (mView != null && result != null) {
-                    mView.showArtist(result);
+                if (mView != null) {
+                    mView.showArtistTopTracks(result);
                 }
             }
 

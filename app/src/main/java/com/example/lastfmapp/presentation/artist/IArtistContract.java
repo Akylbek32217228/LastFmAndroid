@@ -8,7 +8,9 @@ import java.util.List;
 public interface  IArtistContract {
 
     interface View extends ICoreMvpContract.View<Presenter> {
-        void showArtist(List<Track> tracks);
+        void showArtistTopTracks(List<Track> tracks);
+
+        void showArtistName(String name);
     }
 
 

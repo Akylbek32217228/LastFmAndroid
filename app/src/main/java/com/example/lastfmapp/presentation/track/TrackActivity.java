@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.core.Logger;
 import com.example.core.mvp.CoreMvpActivity;
 import com.example.lastfmapp.App;
 import com.example.lastfmapp.R;
@@ -17,21 +16,25 @@ public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> imp
     TextView artistName;
     TextView textViewLyrics;
     ProgressBar progressBar;
-    private static final String EXTRA_TRACK_ID = "track_id";
     private static final String EXTRA_TRACK_UNIQUEID = "unique_id";
 
     @Override
     protected ITrackContract.Presenter providePresenter() {
-        return new TrackPresenter(App.tracksRepository, App.lyricsRepository, getTrackUniqueId(getIntent()));
+        return new TrackPresenter(App.tracksRepository, App.lyricsRepository, getTrackUniqueId(getIntent()),
+                getArtistName(getIntent()), getTrackName(getIntent()));
     }
 
     public static void start(
             Activity activity,
-            String uniqueId
+            String uniqueId,
+            String artistName,
+            String trackName
     ) {
         Intent intent = new Intent(activity, TrackActivity.class);
 
         intent.putExtra(EXTRA_TRACK_UNIQUEID, uniqueId);
+        intent.putExtra("artistName", artistName);
+        intent.putExtra("trackName", trackName);
 
         activity.startActivity(intent);
     }
@@ -40,9 +43,15 @@ public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> imp
         return intent.getStringExtra(EXTRA_TRACK_UNIQUEID);
     }
 
+    private static String getTrackName(Intent intent) {
+        return intent.getStringExtra("trackName");
+    }
+
+    private static String getArtistName(Intent intent) {
+        return intent.getStringExtra("artistName");
+    }
     @Override
     protected void initView() {
-        //presenter.getTrack(track, artist);
         trackName = findViewById(R.id.track_name);
         artistName = findViewById(R.id.artist_name);
         textViewLyrics = findViewById(R.id.track_lyrics);
@@ -75,9 +84,4 @@ public class TrackActivity extends CoreMvpActivity<ITrackContract.Presenter> imp
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
 }

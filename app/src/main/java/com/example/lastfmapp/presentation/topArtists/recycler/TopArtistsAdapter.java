@@ -30,16 +30,6 @@ public class  TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsViewHolde
             public void onArtistClick(int pos) {
 
             }
-
-            @Override
-            public void onShareClick(int pos) {
-
-            }
-
-            @Override
-            public void onBookMarkClick(int pos) {
-
-            }
         });
     }
 

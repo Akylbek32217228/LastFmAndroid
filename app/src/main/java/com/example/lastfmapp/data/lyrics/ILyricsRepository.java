@@ -1,10 +1,10 @@
 package com.example.lastfmapp.data.lyrics;
 
-import com.example.core.mvp.CoreCallback;
+import com.example.core.CoreCallback;
 
 public interface ILyricsRepository {
 
-    void getLyrics(LyricsCallback callback, String artist, String track);
+    void getLyrics(String artist, String track,LyricsCallback callback);
 
     interface LyricsCallback extends CoreCallback<String> {}
 }

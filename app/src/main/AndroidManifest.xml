@@ -15,7 +15,6 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.example.core.mvp.CoreMvpActivity"></activity>
         <activity android:name=".presentation.track.TrackActivity"/>
         <activity android:name=".presentation.artist.ArtistActivity" />
         <activity android:name=".presentation.topArtists.TopArtistsActivity" />

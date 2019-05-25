@@ -1,5 +1,6 @@
 package com.example.lastfmapp.presentation.main;
 
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,15 +21,7 @@ import com.example.lastfmapp.presentation.topTracks.TopTracksPresenter;
 import java.util.ArrayList;
 
 public class  MainActivity extends AppCompatActivity {
-    private SectionsPagerAdapter sectionsPagerAdapter;
-    TopArtistsFragment topArtistsFragment;
-    TopTracksFragment topTracksFragment;
-    private ITopTracksContract.Presenter mPresenter;
-    private ITopArtistsContract.Presenter artistsPresenter;
-    private TabLayout tab;
-    ArrayList<Fragment> list;
 
-    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,36 +29,39 @@ public class  MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        topTracksFragment = TopTracksFragment.newInstance();
-        topArtistsFragment = TopArtistsFragment.newInstance();
+        TopTracksFragment topTracksFragment = TopTracksFragment.newInstance();
+        TopArtistsFragment topArtistsFragment = TopArtistsFragment.newInstance();
 
 
-        artistsPresenter = new TopArtistsPresenter(App.artistsRepository);
+        ITopArtistsContract.Presenter artistsPresenter = new TopArtistsPresenter(App.artistsRepository);
         artistsPresenter.attachView(topArtistsFragment);
-        mPresenter = new TopTracksPresenter(App.tracksRepository);
+        ITopTracksContract.Presenter mPresenter = new TopTracksPresenter(App.tracksRepository);
         mPresenter.attachView(topTracksFragment);
 
-        list = new ArrayList<>();
+        ArrayList<Fragment> list = new ArrayList<>();
 
         list.add(topTracksFragment);
         list.add(topArtistsFragment);
 
-        sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        viewPager = findViewById(R.id.container_fragment);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), list);
+        ViewPager viewPager = findViewById(R.id.container_fragment);
         viewPager.setAdapter(sectionsPagerAdapter);
 
 
-        tab = findViewById(R.id.tab_dots);
+        TabLayout tab = findViewById(R.id.tab_dots);
         tab.setupWithViewPager(viewPager, true);
 
     }
 
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
+        ArrayList<Fragment> list;
+        public SectionsPagerAdapter(FragmentManager fm , ArrayList<Fragment> list) {
             super(fm);
+            this.list = list;
         }
+
+        String[] titles = {"Top Tracks", "Top Artists"};
 
         @Override
         public Fragment getItem(int position) {
@@ -76,6 +72,12 @@ public class  MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return list.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
         }
     }
 }

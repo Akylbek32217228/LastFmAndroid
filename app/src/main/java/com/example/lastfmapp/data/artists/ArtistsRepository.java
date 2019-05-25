@@ -37,7 +37,6 @@ public class ArtistsRepository implements IArtistsRepository {
             remote.getArtists(new ArtistsCallback() {
                 @Override
                 public void onSucces(List<Artist> artists) {
-                    Logger.d(artists.get(0).getName() + "NAMEEEEE");
                     local.setArtists(artists);
 
                     callback.onSucces(artists);

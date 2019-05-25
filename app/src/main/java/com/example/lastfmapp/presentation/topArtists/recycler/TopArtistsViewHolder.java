@@ -26,8 +26,6 @@ public class TopArtistsViewHolder extends RecyclerView.ViewHolder {
 
     public interface TopArtistsListener {
         void onArtistClick(int pos);
-        void onShareClick(int pos);
-        void onBookMarkClick(int pos);
     }
 
 

@@ -21,7 +21,7 @@ public class LyricsRemoteStorage implements ILyricsRemoteStorage {
     public static LyricsNetworkClient client = retrofit.create(LyricsNetworkClient.class);
 
     @Override
-    public void getLyrics(final ILyricsRepository.LyricsCallback callback, String artist, String track) {
+    public void getLyrics( String artist, String track, final ILyricsRepository.LyricsCallback callback) {
         Call<LyricsResponse> call = client.getLyric(artist, track);
 
         call.enqueue(new Callback<LyricsResponse>() {

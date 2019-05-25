@@ -28,7 +28,6 @@ public class TopTracksPresenter extends CoreMvpPresenter<ITopTracksContract.View
     @Override
     public void onViewCreated() {
         super.onViewCreated();
-        Logger.d("lalalalalala");
         getTracks();
     }
 

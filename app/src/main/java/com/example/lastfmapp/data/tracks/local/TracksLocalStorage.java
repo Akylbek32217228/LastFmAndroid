@@ -15,7 +15,6 @@ import io.realm.RealmResults;
 
 public class TracksLocalStorage extends CoreRealmDataSourse implements ITracksLocalStorage {
 
-    ArrayList<Track> tracks = new ArrayList<>();
 
     public void getArtistTracks(String artistName, ITracksRepository.TracksCallback callback) {
         Realm realm = null;
@@ -25,8 +24,6 @@ public class TracksLocalStorage extends CoreRealmDataSourse implements ITracksLo
 
             RealmResults<RTrack> results = realm.where(RTrack.class).contains("uniqueId", artistName).findAll();
             callback.onSucces(TracksMapper.toTracks(realm.copyFromRealm(results)));
-
-            //TODO: Search tracks by artistName
         } catch (Exception e) {
             Logger.e(e);
         } finally {
@@ -59,24 +56,21 @@ public class TracksLocalStorage extends CoreRealmDataSourse implements ITracksLo
     }
 
     @Override
-    public void setTracks(List<Track> tracks) {
-        //this.tracks.addAll(tracks);
-        Logger.d("     " + "setTrack from database      ");
-        final List<RTrack> rTracks = TracksMapper.toRTracks(tracks);
+    public void setTracks(final List<Track> tracks) {
         executeTransanction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                for (RTrack rTrack : rTracks) {
+                for (Track track : tracks) {
 
                     RTrack managedTrack = realm.where(RTrack.class)
-                            .equalTo("uniqueId", rTrack.getUniqueId())
+                            .equalTo("uniqueId", track.getUniqueId())
                             .findFirst();
 
                     if (managedTrack == null) {
-                        realm.copyToRealm(rTrack);
+                        realm.copyToRealm(TracksMapper.toRTrack(track));
                     } else {
-                        managedTrack.setListeners(rTrack.getListeners());
-                        managedTrack.setPlaycount(rTrack.getPlaycount());
+                        managedTrack.setListeners(track.getListeners());
+                        managedTrack.setPlaycount(track.getPlaycount());
                     }
                 }
 
@@ -92,7 +86,6 @@ public class TracksLocalStorage extends CoreRealmDataSourse implements ITracksLo
         Realm realm = null;
         Track track = null;
         RTrack rTrack;
-        Logger.d("getTrackTracksLocalStorage");
 
         try {
             realm = getRealmInStance();
@@ -109,12 +102,6 @@ public class TracksLocalStorage extends CoreRealmDataSourse implements ITracksLo
                 realm.close();
             }
         }
-
-        /*for ( int i =0; i < tracks.size(); ++i) {
-            if ( tracks.get(i).getUniqueId().equals(uniqueId)) {
-                track = tracks.get(i);
-            }
-        }*/
 
         return track;
     }

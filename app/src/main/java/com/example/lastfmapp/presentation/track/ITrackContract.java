@@ -11,12 +11,12 @@ public interface ITrackContract{
         void showLyrics(String lyrics);
 
         void setVisibility(boolean visible);
-        //void openTrack(Track track);
+
 
     }
 
     interface Presenter extends ICoreMvpContract.Presenter<View>{
-
+        void loadTrack();
     }
 
 }

@@ -1,16 +1,13 @@
 package com.example.lastfmapp.presentation.topTracks.recycler;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.core.Logger;
 import com.example.lastfmapp.R;
 import com.example.lastfmapp.model.Track;
-import com.example.lastfmapp.presentation.track.TrackActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,6 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksViewHolder> 
 
     public TopTracksAdapter( TopTracksViewHolder.TopTrackListener listener, ArrayList<Track> list) {
         mListener = listener;
-        Logger.d("TopTracksAdapter");
         mlist = list;
     }
 

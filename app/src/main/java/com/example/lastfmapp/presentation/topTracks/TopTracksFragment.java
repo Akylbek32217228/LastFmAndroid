@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 
@@ -52,7 +51,8 @@ public class TopTracksFragment extends CoreMvpFragment<ITopTracksContract.Presen
     @Override
     public void openTrackDetails(Track track) {
         if ( getActivity() != null) {
-            TrackActivity.start(getActivity(), track.getUniqueId());
+            TrackActivity.start(getActivity(), track.getUniqueId(), track.getArtist().getName(),
+                    track.getName());
         }
     }
 
@@ -85,7 +85,6 @@ public class TopTracksFragment extends CoreMvpFragment<ITopTracksContract.Presen
 
     @Override
     protected void initView(View view) {
-        //TODO: Init
         RecyclerView recyclerView = getActivity().findViewById(R.id.top_tracks_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new TopTracksAdapter(this, new ArrayList<Track>());

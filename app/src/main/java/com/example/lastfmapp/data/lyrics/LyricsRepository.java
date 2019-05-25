@@ -13,10 +13,10 @@ public class LyricsRepository implements ILyricsRepository {
     }
 
     @Override
-    public void getLyrics(final ILyricsRepository.LyricsCallback callback , String artist, String track) {
+    public void getLyrics(String artist, String track, final ILyricsRepository.LyricsCallback callback) {
 
         if ( remoteStorage != null) {
-            remoteStorage.getLyrics(new LyricsCallback() {
+            remoteStorage.getLyrics(artist,track ,new LyricsCallback() {
                 @Override
                 public void onSucces(String result) {
                     callback.onSucces(result);
@@ -26,7 +26,7 @@ public class LyricsRepository implements ILyricsRepository {
                 public void onFailure(String message) {
                     callback.onFailure(message);
                 }
-            },artist,track);
+            });
         }
     }
 

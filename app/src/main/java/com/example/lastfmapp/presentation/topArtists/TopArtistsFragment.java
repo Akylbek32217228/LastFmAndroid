@@ -50,10 +50,6 @@ public class TopArtistsFragment extends CoreMvpFragment<ITopArtistsContract.Pres
 
     }
 
-    @Override
-    public void finisView() {
-        getActivity().finish();
-    }
 
     @Override
     protected int getLayoutId() {

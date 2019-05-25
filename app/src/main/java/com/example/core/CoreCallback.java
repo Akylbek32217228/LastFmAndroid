@@ -1,4 +1,4 @@
-package com.example.core.mvp;
+package com.example.core;
 
 public interface CoreCallback<T> {
 

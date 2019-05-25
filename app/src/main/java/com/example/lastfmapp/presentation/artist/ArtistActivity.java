@@ -12,6 +12,7 @@ import com.example.lastfmapp.R;
 import com.example.lastfmapp.model.Track;
 import com.example.lastfmapp.presentation.artist.recycler.ArtistAdapter;
 import com.example.lastfmapp.presentation.artist.recycler.ArtistViewHolder;
+import com.example.lastfmapp.presentation.track.TrackActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ ArtistViewHolder.ArtistListener{
     private static final String EXTRA_ACTIVTY_UNIQUE_ID = "unique_id";
     private TextView artistName;
     ArtistAdapter adapter;
+    private List<Track> tracks;
 
     @Override
     protected IArtistContract.Presenter providePresenter() {
@@ -55,19 +57,20 @@ ArtistViewHolder.ArtistListener{
 
 
     @Override
-    public void showArtist(List<Track> tracks) {
-        artistName.setText(tracks.get(0).getArtist().getName());
+    public void onTrackClick(int pos) {
+        TrackActivity.start(this, tracks.get(pos).getUniqueId(),
+                tracks.get(pos).getArtist().getName(),
+                tracks.get(pos).getName());
+    }
+
+    @Override
+    public void showArtistTopTracks(List<Track> tracks) {
+        this.tracks = tracks;
         adapter.setArtistTracks(tracks);
     }
 
     @Override
-    public void onTrackClick(int pos) {
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+    public void showArtistName(String name) {
+        artistName.setText(name);
     }
 }
